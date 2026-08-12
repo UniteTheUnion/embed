@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en-GB">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Work Voice Pay Monthly</title>
+<style>
+  html,body{margin:0;padding:0;overflow:hidden;background:#fff}
+  #f{width:700px;height:2600px;border:0;display:block;transform-origin:top left}
+</style>
+<iframe id="f" src="https://pub.mailmodo.dev/p/1iXrJOS62s" title="Newsletter"></iframe>
+<script>
+  var W=700, H=2600, f=document.getElementById('f');
+  function fit(){
+    var s=Math.min(1, document.documentElement.clientWidth/W);
+    f.style.transform='scale('+s+')';
+    document.body.style.height=(H*s)+'px';
+  }
+  new ResizeObserver(fit).observe(document.documentElement);
+  fit();
+</script>
