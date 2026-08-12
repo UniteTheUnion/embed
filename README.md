@@ -1,14 +1,14 @@
 This is simply a wrapper that ensures the content published via MailModo is sized to fit the viewport of the device on which it is viewed.
 
-It expects an argument p that is obtained from mailmodo Campaigns > (click on desired campaign name) > (three dots menu) > Publish on Web
+This is necessary because elevated security (!?) on the Umbraco site as of 2026-08 strips script tags, style tags, and we don't know what else. I wish it were not so, but its easier to work around than to row upstream.
 
-This displays a publish link, and it should be of the form https://pub.mailmodo.dev/p/1iXrJOS62s
+This wrapper expects an argument `p` that is obtained from `mailmodo Campaigns > (click on desired campaign name) > (three dots menu) > Publish on Web`
 
-The argument p is then updated in livecms (Umbraco, the main UniteTheUnion web site) to be the last part of that link (in this example it should be 1iXrJOS62s)
+This displays a publish link, and it should be of the form `https://pub.mailmodo.dev/p/1iXrJOS62s` where the last part of this link is used as the value p (as shown below).
 
 This should be updated every month as new campaigns are created to send the WVP Monthly newsletter.
 
-You can also adjust the height h and width w as needed, to match the iframe in livecms.
+You can also adjust the height h and width w as needed, to match the iframe in livecms, should this ever change.
 
 Here is the dynamic content (that needs updating monthly) in the Umbraco CMS.
 
