@@ -10,7 +10,7 @@ This should be updated every month as new campaigns are created to send the WVP 
 
 You can also adjust the height h and width w as needed, to match the iframe in livecms, should this ever change.
 
-Here is the dynamic content (that needs updating monthly) in the Umbraco CMS.
+Here is the dynamic content in the Umbraco CMS that needs updating monthly, as new WVP Monthly emails are sent out.
 
 ```html
 <p style="max-width: 100%; overflow-x: hidden; margin: 0px auto; text-align: center">
