@@ -37,3 +37,5 @@ Here is the dynamic content (that needs updating monthly) in the Umbraco CMS.
     </span>
 </p>
 ```
+
+Notice that the wrapper is exposed as a Github page on unitetheunion.github.io.
