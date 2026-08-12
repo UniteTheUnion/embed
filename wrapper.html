@@ -10,11 +10,33 @@
 <iframe id="f" src="https://pub.mailmodo.dev/p/1iXrJOS62s" title="Newsletter"></iframe>
 <script>
   var W=700, H=2600, f=document.getElementById('f');
+
   function fit(){
     var s=Math.min(1, document.documentElement.clientWidth/W);
     f.style.transform='scale('+s+')';
     document.body.style.height=(H*s)+'px';
   }
+
+  // New function to hide unsubscribe links
+  function hideUnsubscribe() {
+    try {
+      var iframeDoc = f.contentDocument || f.contentWindow.document;
+      var links = iframeDoc.getElementsByTagName('a');
+
+      for (var i = 0; i < links.length; i++) {
+        if (links[i].textContent.toLowerCase().includes('unsubscribe')) {
+          links[i].style.display = 'none';
+        }
+      }
+    } catch (e) {
+      console.error("Cannot access iframe content due to Same-Origin Policy.");
+    }
+  }
+
+  // Execute when iframe loads
+  f.onload = hideUnsubscribe;
+
   new ResizeObserver(fit).observe(document.documentElement);
   fit();
 </script>
+</html>
