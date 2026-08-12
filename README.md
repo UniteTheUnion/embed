@@ -1,6 +1,6 @@
 This is simply a wrapper that ensures the content published via MailModo is sized to fit the viewport of the device on which it is viewed.
 
-This is necessary because elevated security (!?) on the Umbraco site as of 2026-08 strips script tags, style tags, and we don't know what else. I wish it were not so, but its easier to work around than to row upstream.
+This is necessary because elevated security (!?) on the Umbraco site as of 2026-08 strips script tags, style tags, and we don't know what else from the "source" that is typed into a dynamic content element on an Umbraco page. I wish it were not so, but after failing to get it working directly in Umbraco, decided it is easier to work around than to row upstream. This wrapper is the workaround.
 
 This wrapper expects an argument `p` that is obtained from `mailmodo Campaigns > (click on desired campaign name) > (three dots menu) > Publish on Web`
 
