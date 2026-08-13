@@ -9,7 +9,10 @@
     padding: 0 !important;
     overflow: hidden;
     background: #fff;
-    width: 100vw;
+    /* Force the body to be slightly wider than the container 
+       to accommodate the negative margins */
+    width: calc(100% + 40px) !important;
+    position: relative;
   }
   #f {
     width: 700px;
@@ -18,17 +21,10 @@
     display: block;
     transform-origin: 0 0;
     will-change: transform;
-
-    /* BREAK-OUT FROM THE UMBRACO WRAPPER */
-    position: absolute;
-    left: 50%;
-    /* This pulls the iframe back by exactly half of its width 
-       relative to the screen, ignoring the Umbraco padding */
-    margin-left: -350px; 
+    /* Pull it hard to the left to override the 20px padding */
+    margin-left: -20px !important; 
   }
 </style>
-
-
 <iframe id="f" src="https://pub.mailmodo.dev/p/1iXrJOS62s" title="Newsletter"></iframe>
 <script>
   var q = new URLSearchParams(location.search),
@@ -36,20 +32,23 @@
       H = +q.get('h') || 2600,
       P = q.get('p') || '1iXrJOS62s',
       f = document.getElementById('f');
-  if (!/^[A-Za-z0-9]+$/.test(P || '')) throw new Error('bad id');  // basic guard
+
+  if (!/^[A-Za-z0-9]+$/.test(P || '')) throw new Error('bad id');
   f.src = 'https://pub.mailmodo.dev/p/' + P;
   f.style.width = W + 'px';
   f.style.height = H + 'px';
-function fit(){
-  var s = Math.min(1, document.documentElement.clientWidth / W);
-  f.style.transform = 'scale(' + s + ')';
-  document.body.style.height = (H * s) + 'px';
 
-  // Update the negative margin to keep it centred while scaled
-  // Original margin was -350 (W/2). We multiply by scale.
-  f.style.marginLeft = (-(W / 2) * s) + 'px';
-}
+  function fit(){
+    // We use window.innerWidth to get the true viewport width, 
+    // ignoring the Umbraco padding.
+    var s = Math.min(1, window.innerWidth / W);
+    f.style.transform = 'scale(' + s + ')';
+    document.body.style.height = (H * s) + 'px';
 
+    // IMPORTANT: We must also scale the negative margin, 
+    // otherwise the 'pull' is too strong on small screens.
+    f.style.marginLeft = (-20 * s) + 'px';
+  }
   new ResizeObserver(fit).observe(document.documentElement);
   fit();
 </script>
