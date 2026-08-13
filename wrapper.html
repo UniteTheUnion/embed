@@ -7,11 +7,9 @@
   html, body {
     margin: 0 !important;
     padding: 0 !important;
-    overflow-x: hidden; /* Prevent horizontal scrollbars */
+    overflow: hidden;
     background: #fff;
-    /* width: 100vw; */ /* Force absolute viewport width */
-    /* Ensure the width expands to compensate for the negative margins */
-    width: calc(100% + 40px) !important; 
+    width: 100vw;
   }
   #f {
     width: 700px;
@@ -21,13 +19,15 @@
     transform-origin: 0 0;
     will-change: transform;
 
-    /* This calculates the distance from the edge of the screen 
-       to the edge of the wrapper and pulls the iframe back */
-    position: relative;
+    /* BREAK-OUT FROM THE UMBRACO WRAPPER */
+    position: absolute;
     left: 50%;
-    margin-left: -350px; /* Half of your 700px width */
+    /* This pulls the iframe back by exactly half of its width 
+       relative to the screen, ignoring the Umbraco padding */
+    margin-left: -350px; 
   }
 </style>
+
 
 <iframe id="f" src="https://pub.mailmodo.dev/p/1iXrJOS62s" title="Newsletter"></iframe>
 <script>
