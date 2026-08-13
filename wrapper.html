@@ -15,7 +15,7 @@
       P = q.get('p') || '1iXrJOS62s',
       f = document.getElementById('f');
   if (!/^[A-Za-z0-9]+$/.test(P || '')) throw new Error('bad id');  // basic guard
-  f.src = 'https://pub.mailmodo.dev/p/' + P;
+  f.src = 'https://pub.mailmodo.dev/p=' + P;
   f.style.width = W + 'px';
   f.style.height = H + 'px';
   function fit(){
