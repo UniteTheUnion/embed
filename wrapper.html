@@ -9,10 +9,7 @@
     padding: 0 !important;
     overflow: hidden;
     background: #fff;
-    /* Force the body to be slightly wider than the container 
-       to accommodate the negative margins */
-    width: calc(100% + 40px) !important;
-    position: relative;
+    width: 100%;
   }
   #f {
     width: 700px;
@@ -21,8 +18,8 @@
     display: block;
     transform-origin: 0 0;
     will-change: transform;
-    /* Pull it hard to the left to override the 20px padding */
-    margin-left: -20px !important; 
+    /* We start with 0 margin because we are scaling into the gap */
+    margin: 0;
   }
 </style>
 <iframe id="f" src="https://pub.mailmodo.dev/p/1iXrJOS62s" title="Newsletter"></iframe>
@@ -33,21 +30,28 @@
       P = q.get('p') || '1iXrJOS62s',
       f = document.getElementById('f');
 
-  if (!/^[A-Za-z0-9]+$/.test(P || '')) throw new Error('bad id');
   f.src = 'https://pub.mailmodo.dev/p/' + P;
   f.style.width = W + 'px';
   f.style.height = H + 'px';
 
   function fit(){
-    // We use window.innerWidth to get the true viewport width, 
-    // ignoring the Umbraco padding.
-    var s = Math.min(1, window.innerWidth / W);
+    // 1. Get the actual width of the iframe container
+    var containerWidth = document.documentElement.clientWidth;
+
+    // 2. Calculate the scale needed to fit the 700px content into the container
+    var s = containerWidth / W;
+
+    // 3. Apply the scale
     f.style.transform = 'scale(' + s + ')';
     document.body.style.height = (H * s) + 'px';
 
-    // IMPORTANT: We must also scale the negative margin, 
-    // otherwise the 'pull' is too strong on small screens.
-    f.style.marginLeft = (-20 * s) + 'px';
+    /* 
+       THE FIX: Since the iframe is offset by 20px by Umbraco, 
+       we shift the content LEFT by exactly 20px * scale.
+       This 'pulls' the content into that dead space.
+    */
+    f.style.position = 'relative';
+    f.style.left = (-20 * s) + 'px';
   }
   new ResizeObserver(fit).observe(document.documentElement);
   fit();
