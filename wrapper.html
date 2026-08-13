@@ -4,9 +4,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Work Voice Pay Monthly</title>
 <style>
-  html,body{margin:0;padding:0;overflow:hidden;background:#fff}
-  #f{width:700px;height:2600px;border:0;display:block;transform-origin:top left}
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden; /* Prevent horizontal scrollbars */
+    background: #fff;
+    width: 100vw; /* Force absolute viewport width */
+  }
+  #f {
+    width: 700px;
+    height: 2600px;
+    border: 0;
+    display: block;
+    transform-origin: 0 0;
+    will-change: transform;
+
+    /* This calculates the distance from the edge of the screen 
+       to the edge of the wrapper and pulls the iframe back */
+    position: relative;
+    left: 50%;
+    margin-left: -350px; /* Half of your 700px width */
+  }
 </style>
+
 <iframe id="f" src="https://pub.mailmodo.dev/p/1iXrJOS62s" title="Newsletter"></iframe>
 <script>
   var q = new URLSearchParams(location.search),
@@ -18,11 +38,16 @@
   f.src = 'https://pub.mailmodo.dev/p=' + P;
   f.style.width = W + 'px';
   f.style.height = H + 'px';
-  function fit(){
-    var s = Math.min(1, document.documentElement.clientWidth / W);
-    f.style.transform = 'scale(' + s + ')';
-    document.body.style.height = (H * s) + 'px';
-  }
+function fit(){
+  var s = Math.min(1, document.documentElement.clientWidth / W);
+  f.style.transform = 'scale(' + s + ')';
+  document.body.style.height = (H * s) + 'px';
+
+  // Update the negative margin to keep it centred while scaled
+  // Original margin was -350 (W/2). We multiply by scale.
+  f.style.marginLeft = (-(W / 2) * s) + 'px';
+}
+
   new ResizeObserver(fit).observe(document.documentElement);
   fit();
 </script>
