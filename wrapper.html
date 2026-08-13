@@ -9,7 +9,9 @@
     padding: 0 !important;
     overflow-x: hidden; /* Prevent horizontal scrollbars */
     background: #fff;
-    width: 100vw; /* Force absolute viewport width */
+    /* width: 100vw; */ /* Force absolute viewport width */
+    /* Ensure the width expands to compensate for the negative margins */
+    width: calc(100% + 40px) !important; 
   }
   #f {
     width: 700px;
