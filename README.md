@@ -8,7 +8,7 @@ This displays a publish link, and it should be of the form `https://pub.mailmodo
 
 This should be updated every month as new campaigns are created to send the WVP Monthly newsletter.
 
-You can also adjust the height h and width w as needed, to match the iframe in livecms, should this ever change.
+You can also adjust the height h and width w as needed, to match the iframe in livecms, should this ever change. You will not normally need to adjust these values.
 
 Here is the dynamic content in the Umbraco CMS that needs updating monthly, as new WVP Monthly emails are sent out.
 
